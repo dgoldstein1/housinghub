@@ -61,8 +61,6 @@ class AuthService:
     _user = self.session.query(User).filter(User.username==username).one_or_none()
     if _user and pbkdf2_sha256.verify(password,_user.password_hash):
       return _user
-    else:
-      return None
 
   def authenticate_request(self,request):
     """extracts jwt token from flask request object, then decodes JWT
